@@ -1,0 +1,17 @@
+node_modules/
+dist/
+upstream/
+output/*
+!output/.gitkeep
+public/input/model.json
+public/input/texture.png
+.DS_Store
+*.log
+yukari-yakumo-run/*
+!yukari-yakumo-run/final/
+yukari-yakumo-run/final/*
+!yukari-yakumo-run/final/spritesheet-extended.webp
+!yukari-yakumo-run/qa/
+yukari-yakumo-run/qa/*
+!yukari-yakumo-run/qa/contact-sheet-extended.png
+!yukari-yakumo-run/qa/look-directions.png
