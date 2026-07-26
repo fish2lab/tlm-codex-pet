@@ -5,6 +5,9 @@ import { AnimationController } from './renderer/animationRuntime'
 import { DEFAULT_MAID_ANIMATIONS } from './tlm/defaultAnimations'
 
 const CELL_W = 192, CELL_H = 208, COLS = 8, ROWS = 11
+const VIEW_FRACTION = 0.8
+const CAMERA_HALF_WIDTH = 18 * VIEW_FRACTION
+const CAMERA_HALF_HEIGHT = 22 * VIEW_FRACTION
 // Codex should copy the selected TLM model and texture here before export.
 // See README.md and AGENTS.md for the asset/licensing boundary.
 const MODEL = '/input/model.json'
@@ -36,7 +39,9 @@ async function main() {
   const renderer=new THREE.WebGLRenderer({alpha:true,antialias:false,preserveDrawingBuffer:true})
   renderer.setPixelRatio(1); renderer.setSize(CELL_W,CELL_H,false); renderer.setClearColor(0,0)
   renderer.outputColorSpace=THREE.SRGBColorSpace
-  const scene=new THREE.Scene(); const camera=new THREE.OrthographicCamera(-18,18,22,-22,.1,200)
+  // Reframe to the centered 80% view on both axes so the model is enlarged
+  // uniformly, preserving its proportions in the standard 192×208 cell.
+  const scene=new THREE.Scene(); const camera=new THREE.OrthographicCamera(-CAMERA_HALF_WIDTH,CAMERA_HALF_WIDTH,CAMERA_HALF_HEIGHT,-CAMERA_HALF_HEIGHT,.1,200)
   camera.position.set(0,0,80); camera.lookAt(0,0,0)
   scene.add(new THREE.HemisphereLight(0xffffff,0x534437,2.2))
   const key=new THREE.DirectionalLight(0xfff0d0,2.4); key.position.set(20,30,30); scene.add(key)
